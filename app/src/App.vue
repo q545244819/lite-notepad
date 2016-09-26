@@ -1,25 +1,26 @@
 <template>
-  <div id="app">
-    <h1>{{ msg }}</h1>
+  <div id="app" class="container-fluid">
+    <div class="row clean">
+      <toolbar></toolbar>
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
+  import Toolbar from './components/Toolbar.vue'
+
   export default {
     data () {
       return {
         msg: `Hello Vue!`
       }
     },
-    replace: false
+    replace: false,
+    components: {
+      Toolbar
+    }
   }
 </script>
 
-<style lang="less">
-  body {
-    font-family: Helvetica, sans-serif;
-    h1 {
-      color: red;
-    }
-  }
-</style>
+<style lang="less"></style>
