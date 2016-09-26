@@ -1,18 +1,24 @@
 <template>
-  <sidebar></sidebar>
+  <div class="sidebar col-sm-3 col-md-3">
+    <router-view></router-view>
+  </div>
   <editor></editor>
 </template>
 
 <script>
-  import Sidebar from './Sidebar.vue'
   import Editor from './Editor.vue'
 
   export default {
     components: {
-      Sidebar,
       Editor
     }
   }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+  .sidebar {
+    height: 100vh;
+    overflow-y: auto;
+    background-color: #ECF0F1;
+  }
+</style>
