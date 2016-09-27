@@ -1,15 +1,17 @@
 <template>
   <div class="sidebar col-sm-3 col-md-3">
-    <router-view></router-view>
+    <notepad></notepad>
   </div>
   <editor></editor>
 </template>
 
 <script>
+  import Notepad from './Notepad.vue'
   import Editor from './Editor.vue'
 
   export default {
     components: {
+      Notepad,
       Editor
     }
   }
@@ -18,6 +20,7 @@
 <style lang="less" scoped>
   .sidebar {
     height: 100vh;
+    padding: 0;
     overflow-y: auto;
     background-color: #ECF0F1;
   }

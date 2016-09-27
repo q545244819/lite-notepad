@@ -8,12 +8,12 @@ import App from './App.vue'
 import User from './components/User.vue'
 import Main from './components/Main.vue'
 import Setting from './components/Setting.vue'
-import Notepad from './components/Notepad.vue'
-import Note from './components/Note.vue'
 
 Vue.use(VueRouter)
 
-const router = new VueRouter()
+const router = new VueRouter({
+  abstract: true
+})
 
 router.map({
   '/user': {
@@ -22,15 +22,7 @@ router.map({
   },
   '/notepad': {
     name: 'notepad',
-    component: Main,
-    subRoutes: {
-      '/': {
-        component: Notepad
-      },
-      '/:id': {
-        component: Note
-      }
-    }
+    component: Main
   },
   '/setting': {
     name: 'setting',
