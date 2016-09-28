@@ -1,14 +1,15 @@
 <template>
   <nav>
-    <section class="item" v-for="item in data" v-link="{name: 'note', params: {id: item.id}}">
+    <section class="item" v-for="item in data">
       <h4 v-text="item.title"></h4>
       <p v-text="item.date"></p>
-      <i class="icon glyphicon glyphicon-edit" @click="edit($event, item.id)"></i>
       <i class="icon glyphicon glyphicon-remove" @click="remove($event, item.id)"></i>
     </section>
     <section class="add row">
       <i @click="add()"
-        class="col-xs-12 glyphicon glyphicon-plus"></i>
+        class="col-xs-6 glyphicon glyphicon-plus"></i>
+      <i @click="returnNotepad()"
+        class="col-xs-6 glyphicon glyphicon-arrow-left"></i>
     </section>
   </nav>
 </template>
@@ -21,15 +22,10 @@
       }
     },
     methods: {
-      edit(e) {
-        e.stopPropagation()
-
-        alert(`current:${this.current}, edit!`)
-      },
       remove(e) {
         e.stopPropagation()
         
-        alert(`current:${this.current}, remove!`)
+        alert(`current:note, remove!`)
       },
       add() {
         this.data.push({
@@ -39,8 +35,7 @@
         })
       },
       returnNotepad() {
-        this.current = 'notepad'
-        this.data = data
+        this.$router.go('/notepad')
       }
     }
   }
@@ -71,12 +66,8 @@
         right: 15px;
       }
 
-      .glyphicon-edit {
-        top: 15px;
-      }
-
       .glyphicon-remove {
-        top: 35px;
+        top: 15px;
       }
 
       .add {

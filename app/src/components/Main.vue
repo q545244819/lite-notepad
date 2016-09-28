@@ -1,12 +1,11 @@
 <template>
   <div class="sidebar col-sm-3 col-md-3">
-    <notepad></notepad>
+    <router-view></router-view>
   </div>
   <editor></editor>
 </template>
 
 <script>
-  import Notepad from './Notepad.vue'
   import Editor from './Editor.vue'
 
   export default {
@@ -16,7 +15,6 @@
       }
     },
     components: {
-      Notepad,
       Editor
     }
   }
