@@ -38,12 +38,16 @@ module.exports = {
         loader: 'vue-html'
       },
       {
-        test: /\.(png|jpg|gif|svg|eot|woff|woff2|ttf)$/,
+        test: /\.(png|jpg|gif)$/,
         loader: 'url',
         query: {
           limit: 10000,
           name: '[name].[ext]?[hash]'
         }
+      },
+      {
+        test: /\.(woff|woff2|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file',
       }
     ]
   },

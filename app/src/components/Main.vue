@@ -10,6 +10,11 @@
   import Editor from './Editor.vue'
 
   export default {
+    data() {
+      return {
+        note: {}
+      }
+    },
     components: {
       Notepad,
       Editor

@@ -19,28 +19,8 @@
 
 <script>
   const data = [
-    {
-      id: 1,
-      title: 'This is notepad 1',
-      date: '2016-01-01'
-    },
-    {
-      id: 2,
-      title: 'This is notepad 2',
-      date: '2016-01-02'
-    }
   ]
   const notes = [
-    {
-      id: 1,
-      title: 'This is note 1',
-      date: '2016-01-01'
-    },
-    {
-      id: 2,
-      title: 'This is note 2',
-      date: '2016-01-02'
-    }
   ]
 
   export default {
@@ -76,6 +56,8 @@
       returnNotepad() {
         this.current = 'notepad'
         this.data = data
+
+        this.$dispatch('toggleMask', true)
       }
     }
   }
@@ -129,10 +111,14 @@
         margin-top: -1px;
 
         &:hover {
-          background-color: #BDC3C7;          
+          background-color: #BDC3C7;         
         }
 
         padding: 15px 0;        
+      }
+
+      .glyphicon-arrow-left {
+        border-left: 1px solid #BDC3C7;
       }
     }
   }
