@@ -11,11 +11,6 @@
   import Toolbar from './components/Toolbar.vue'
 
   export default {
-    data () {
-      return {
-        msg: `Hello Vue!`
-      }
-    },
     replace: false,
     components: {
       Toolbar
