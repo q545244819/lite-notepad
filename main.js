@@ -1,5 +1,4 @@
 const electron = require('electron')
-const Shortcut = require('electron-shortcut')
 const config = require('./config')
 
 const app = electron.app
