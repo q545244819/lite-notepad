@@ -1,9 +1,9 @@
 <template>
   <div class="toolbar col-sm-1 col-md-1">
     <nav>
-      <a v-link="{ path: '/user', activeClass: 'active' }" class="glyphicon glyphicon-user"></a>
-      <a v-link="{ path: '/notepad', activeClass: 'active' }" class="glyphicon glyphicon-book"></a>
-      <a v-link="{ path: '/setting', activeClass: 'active' }" class="glyphicon glyphicon-cog"></a>
+      <a class="fa fa-plus" aria-hidden="true"></a>
+      <a class="fa fa-times" aria-hidden="true"></a>
+      <a class="fa fa-refresh" aria-hidden="true"></a>
     </nav>
   </div>
 </template>
@@ -28,13 +28,13 @@
     
     nav {
       a {
+        cursor: pointer;
+
         &:hover,
         &:active,
         &:link {
-          text-decoration: none;
-        }
-        &.active {
           background-color: #34495E;
+          text-decoration: none;
         }
 
         display: block;

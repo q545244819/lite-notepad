@@ -4,48 +4,33 @@ import 'font-awesome/css/font-awesome.min.css'
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Editor from 'vue-html5-editor'
+import VueEditor from 'vue-html5-editor'
 import Config from './config'
 
 import App from './App.vue'
-import User from './components/User.vue'
-import Main from './components/Main.vue'
-import Setting from './components/Setting.vue'
-import Notepad from './components/Notepad.vue'
-import Note from './components/Note.vue'
+import Disable from './components/Disable.vue'
+import Editor from './components/Editor.vue'
 
 Vue.use(VueRouter)
-Vue.use(Editor, Config.editor)
+Vue.use(VueEditor, Config.editor)
 
 const router = new VueRouter({
   abstract: true
 })
 
 router.map({
-  '/user': {
-    name: 'user',
-    component: User
-  },
-  '/notepad': {
-    component: Main,
+  '/note': {
+    component: Disable,
     subRoutes: {
-      '/': {
-        name: 'notepad',
-        component: Notepad
-      },
       '/:id': {
-        name: 'note',
-        component: Note
+        name: 'editor',
+        component: Editor
       }
     }
-  },
-  '/setting': {
-    name: 'setting',
-    component: Setting
   }
 })
 router.redirect({
-  '*': '/notepad'
+  '*': '/note'
 })
 router.start(App, 'body')
 
