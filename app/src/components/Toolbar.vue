@@ -2,7 +2,7 @@
   <div class="toolbar col-sm-1 col-md-1">
     <nav>
       <a class="fa fa-plus" aria-hidden="true" @click="addNote()"></a>
-      <a class="fa fa-times" aria-hidden="true"></a>
+      <a class="fa fa-times" aria-hidden="true" @click="remove()"></a>
       <a class="fa fa-refresh" aria-hidden="true"></a>
     </nav>
   </div>
@@ -10,13 +10,26 @@
 
 <script>
   import {
-    addNote
+    addNote,
+    removeNoteById
   } from '../vuex/action.js'
 
   export default {
     vuex: {
       actions: {
-        addNote
+        addNote,
+        removeNoteById
+      }
+    },
+    methods: {
+      remove() {
+        if (confirm('是否要删除这条笔记？')) {
+          this.$router.go({
+            name: 'note'
+          })
+
+          this.removeNoteById()
+        }
       }
     }
   }

@@ -1,7 +1,10 @@
 <template>
   <div class="sidebar col-sm-3 col-md-3">
     <nav>
-      <section class="item" v-for="item in notes" v-link="{name: 'edit', params: {id: item.id}}" @click="setCurrentNoteId(item.id)">
+      <section class="item"
+        v-for="item in notes"
+        v-link="{name: 'edit', params: {id: item.id}, activeClass: 'active'}"
+        @click="setCurrentNoteId(item.id)">
         <h4 v-text="item.title"></h4>
         <p>创建于：<span v-text="item.date"></span></p>
       </section>
@@ -39,7 +42,8 @@
 
   nav {
     .item {
-      &:hover {
+      &:hover,
+      &.active {
         background-color: #BDC3C7;
       }
       position: relative;

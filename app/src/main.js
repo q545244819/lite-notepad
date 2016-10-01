@@ -12,7 +12,7 @@ import Disable from './components/Disable.vue'
 import Editor from './components/Editor.vue'
 
 Vue.use(VueRouter)
-Vue.use(VueEditor, Config.editor)
+Vue.use(VueEditor)
 
 const router = new VueRouter({
   abstract: true
@@ -32,4 +32,3 @@ router.redirect({
   '*': '/note'
 })
 router.start(App, 'body')
-

@@ -17,6 +17,11 @@ const mutations = {
 
     state.notes.push(note)
   },
+  ['REMOVE_NOTE'](state) {
+    state.notes.splice(state.currentNoteId, 1)
+
+    state.currentNoteId = ''
+  },
   ['SET_CURRENTNOTEID'](state, id) {
     state.currentNoteId = id
   }

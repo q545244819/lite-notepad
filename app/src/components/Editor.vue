@@ -2,7 +2,7 @@
   <div class="editor col-sm-8 col-md-8">
     <input type="text" class="form-control" placeholder="请输入笔记标题" v-model="note.title">
     <div>
-      <vue-html5-editor :content.sync="note.content" :z-index="1" :auto-height="true"></vue-html5-editor>
+      <vue-html5-editor :content.sync="note.content" :auto-height="true"></vue-html5-editor>
     </div>
   </div>
 </template>

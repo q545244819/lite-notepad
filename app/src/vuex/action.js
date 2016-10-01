@@ -5,6 +5,12 @@ export const addNote = ({dispatch, state}) => {
   })
 }
 
+export const removeNoteById = ({dispatch, state}) => {
+  if (state.currentNoteId !== '') {
+    dispatch('REMOVE_NOTE')
+  } 
+}
+
 export const setCurrentNoteId = ({dispatch, state}, id) => {
   dispatch('SET_CURRENTNOTEID', id)
 }
