@@ -15,10 +15,31 @@
 </template>
 
 <script>
+  import { remote, clipboard, ipcRenderer } from 'electron'
   import store from './vuex/store'
   import Toolbar from './components/Toolbar.vue'
   import Note from './components/Note.vue'
   import { alert } from 'vue-strap'
+
+  const { Menu, MenuItem } = remote
+  const menu = new Menu()
+
+  menu.append(new MenuItem({
+    label: '剪切',
+    role: 'cut'
+  }))
+  menu.append(new MenuItem({
+    label: '复制',
+    role: 'copy'
+  }))
+  menu.append(new MenuItem({
+    label: '粘贴',
+    role: 'paste'
+  }))
+  menu.append(new MenuItem({
+    label: '开发者工具',
+    click: () => ipcRenderer.send('openDevTools')
+  }))
 
   export default {
     data() {
@@ -46,9 +67,16 @@
       Note,
       alert
     },
+    ready() {
+      this.$el.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+	      menu.popup(remote.getCurrentWindow());
+      })
+    },
     replace: false,    
     store
   }
 </script>
 
-<style lang="less"></style>
+<style lang="less">
+</style>
