@@ -32,7 +32,7 @@
   const save = (note) => {
     return new Promise((resolve, reject) => {
       storage.get('notes', (err, data) => {
-        const changeNote = data[note.id]
+        const changeNote = data.filter(item => item.id === note.id)[0]
 
         changeNote.title = note.title
         changeNote.content = note.content
