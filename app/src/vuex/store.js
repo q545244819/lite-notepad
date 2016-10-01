@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 const state = {
   notes: [],
-  currentNoteId: ''
+  currentNoteId: '' // 存放 note 的 id，而不是在数组下的下标值
 }
 
 const mutations = {
@@ -15,8 +15,8 @@ const mutations = {
   ['ADD_NOTE'](state, note) {
     state.notes.push(note)
   },
-  ['REMOVE_NOTE'](state) {
-    state.notes.splice(state.currentNoteId, 1)
+  ['REMOVE_NOTE'](state, index) {
+    state.notes.splice(index, 1)
 
     state.currentNoteId = ''
   },

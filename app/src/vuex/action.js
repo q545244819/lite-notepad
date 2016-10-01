@@ -40,15 +40,23 @@ export const addNote = ({dispatch, state}) => {
 export const removeNoteById = ({dispatch, state}) => {
   return new Promise((resolve, reject) => {
     if (state.currentNoteId !== '') {
+      let i = 0
+
       storage.get('notes', (err, data) => {
-        data.splice(state.currentNoteId, 1)
+        data.forEach((item, index) => {
+          if (item.id === state.currentNoteId) {
+            return i = index
+          }
+        })
+        
+        data.splice(i, 1)
 
         storage.set('notes', data, (err) => {
           if (err) {
             return reject(err)
           }
 
-          dispatch('REMOVE_NOTE')
+          dispatch('REMOVE_NOTE', i)
           
           resolve()
         })
