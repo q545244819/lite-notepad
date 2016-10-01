@@ -4,3 +4,4 @@ app/dist
 .vscode
 npm-debug.log
 npm-debug.log.*
+.DS_Store
