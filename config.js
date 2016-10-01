@@ -1,5 +1,5 @@
 module.exports = {
-  width: 900,
+  width: 800,
   height: 600,
   port: '8080'
 }
