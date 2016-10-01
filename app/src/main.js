@@ -20,13 +20,12 @@ const router = new VueRouter({
 
 router.map({
   '/note': {
-    component: Disable,
-    subRoutes: {
-      '/:id': {
-        name: 'editor',
-        component: Editor
-      }
-    }
+    name: 'note',
+    component: Disable
+  },
+  '/note/:id': {
+    name: 'edit',
+    component: Editor
   }
 })
 router.redirect({

@@ -9,6 +9,7 @@
 </template>
 
 <script>
+  import store from './vuex/store'
   import Toolbar from './components/Toolbar.vue'
   import Note from './components/Note.vue'
 
@@ -17,7 +18,8 @@
     components: {
       Toolbar,
       Note
-    }
+    },
+    store
   }
 </script>
 

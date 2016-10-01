@@ -15,8 +15,6 @@ export default {
       hr: "fa fa-minus",
       eraser: "fa fa-eraser",
       undo: "fa-undo fa",
-      "full-screen": "fa fa-arrows-alt",
-      info: "fa fa-info",
     },
     //config image module
     image: {

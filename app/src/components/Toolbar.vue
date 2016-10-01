@@ -1,7 +1,7 @@
 <template>
   <div class="toolbar col-sm-1 col-md-1">
     <nav>
-      <a class="fa fa-plus" aria-hidden="true"></a>
+      <a class="fa fa-plus" aria-hidden="true" @click="addNote()"></a>
       <a class="fa fa-times" aria-hidden="true"></a>
       <a class="fa fa-refresh" aria-hidden="true"></a>
     </nav>
@@ -9,9 +9,15 @@
 </template>
 
 <script>
+  import {
+    addNote
+  } from '../vuex/action.js'
+
   export default {
-    data() {
-      return {}
+    vuex: {
+      actions: {
+        addNote
+      }
     }
   }
 </script>
@@ -25,27 +31,23 @@
     background-color: #2C3E50;
     color: #fff;
     text-align: center;
-    
     nav {
       a {
         cursor: pointer;
-
         &:hover,
         &:active,
         &:link {
           background-color: #34495E;
           text-decoration: none;
         }
-
         display: block;
         padding: 20px 0;
         color: #fff;
         font-size: 16px;
       }
-
       .setting-icon {
         position: absolute;
-        width: 100%;        
+        width: 100%;
         bottom: 0;
         left: 0;
       }

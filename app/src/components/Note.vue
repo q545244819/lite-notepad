@@ -1,37 +1,29 @@
 <template>
   <div class="sidebar col-sm-3 col-md-3">
     <nav>
-      <section class="item" v-for="item in data">
+      <section class="item" v-for="item in notes" v-link="{name: 'edit', params: {id: item.id}}" @click="setCurrentNoteId(item.id)">
         <h4 v-text="item.title"></h4>
-        <p v-text="item.date"></p>
-        <i class="icon glyphicon glyphicon-remove" @click="remove($event, item.id)"></i>
+        <p>创建于：<span v-text="item.date"></span></p>
       </section>
     </nav>
   </div>
 </template>
 
 <script>
+  import {
+    getNotes
+  } from '../vuex/getters'
+  import {
+    setCurrentNoteId
+  } from '../vuex/action'
+
   export default {
-    data() {
-      return {
-        data: []
-      }
-    },
-    methods: {
-      remove(e) {
-        e.stopPropagation()
-        
-        alert(`current:note, remove!`)
+    vuex: {
+      getters: {
+        notes: getNotes
       },
-      add() {
-        this.data.push({
-          id: this.data.length + 1,
-          title: `This is note${this.data.length + 1}`,
-          date: '2015-01-01'
-        })
-      },
-      returnNotepad() {
-        this.$router.go('/notepad')
+      actions: {
+        setCurrentNoteId
       }
     }
   }
