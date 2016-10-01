@@ -8,14 +8,44 @@
 </template>
 
 <script>
+  import os from 'os'
+  import storage from 'electron-json-storage'
+  import key from 'keyboard-shortcut'
   import {
     getNoteById
   } from '../vuex/getters'
+
+  const platform = os.platform()
+  const save = (note) => {
+    storage.get('notes', (err, data) => {
+      const changeNote = data[note.id]
+
+      changeNote.title = note.title
+      changeNote.content = note.content
+
+      storage.set('notes', data, (err, data) => {
+        if (err) {
+          return console.error(data)
+        }
+
+        console.log('saved!')
+      })
+    })
+  }
 
   export default {
     vuex: {
       getters: {
         note: getNoteById
+      }
+    },
+    ready() {
+      if (platform === 'darwin') {
+        key('meta s', () => save(this.note))        
+      }
+
+      if (platform === 'win32') {
+        key('ctrl s', () => save(this.note))        
       }
     }
   }
