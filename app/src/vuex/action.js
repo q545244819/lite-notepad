@@ -1,5 +1,6 @@
 import storage from 'electron-json-storage'
 import format from 'date-format'
+import uid from 'uid'
 
 export const getNotesFormLocal = ({dispatch, state}) => {
   return new Promise((resolve, reject) => {
@@ -18,8 +19,7 @@ export const getNotesFormLocal = ({dispatch, state}) => {
 export const addNote = ({dispatch, state}) => {
   return new Promise((resolve, reject) => {
     const data = {
-      id: state.notes.length,
-      localId: state.notes.length,
+      id: uid(),
       title: '未命名',
       content: '',
       date: format('yyyy-MM-dd hh:mm', new Date())

@@ -1,7 +1,7 @@
 <template>
   <div class="toolbar col-sm-1 col-md-1">
     <nav>
-      <a class="fa fa-plus" aria-hidden="true" @click="addNote()">
+      <a class="fa fa-plus" aria-hidden="true" @click="add()">
         <div class="tooltip right" role="tooltip">
           <div class="tooltip-arrow"></div>
           <div class="tooltip-inner">
@@ -33,17 +33,26 @@
   import { popover } from 'vue-strap'
   import {
     addNote,
-    removeNoteById
+    removeNoteById,
+    setCurrentNoteId
   } from '../vuex/action.js'
 
   export default {
     vuex: {
       actions: {
         addNote,
-        removeNoteById
+        removeNoteById,
+        setCurrentNoteId
       }
     },
     methods: {
+      add() {
+        this.addNote()
+          .then(note => {
+            this.setCurrentNoteId(note.id)
+            this.$router.go(`/note/${note.id}`)
+          })
+      },
       remove() {
         if (confirm('是否要删除这条笔记？')) {
           this.$router.go({
