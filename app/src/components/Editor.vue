@@ -16,19 +16,34 @@
   } from '../vuex/getters'
 
   const platform = os.platform()
+  const success = {
+    show: true,
+    duration: 1000,
+    type: 'success',
+    placement: 'top',
+    content: '保存笔记成功！'
+  }
+  const error = {
+    show: true,
+    type: 'error',
+    placement: 'top',
+    content: '保存笔记失败！'
+  }
   const save = (note) => {
-    storage.get('notes', (err, data) => {
-      const changeNote = data[note.id]
+    return new Promise((resolve, reject) => {
+      storage.get('notes', (err, data) => {
+        const changeNote = data[note.id]
 
-      changeNote.title = note.title
-      changeNote.content = note.content
+        changeNote.title = note.title
+        changeNote.content = note.content
 
-      storage.set('notes', data, (err, data) => {
-        if (err) {
-          return console.error(data)
-        }
+        storage.set('notes', data, (err, data) => {
+          if (err) {
+            return reject(err)
+          }
 
-        console.log('saved!')
+          resolve(data)
+        })
       })
     })
   }
@@ -41,12 +56,16 @@
     },
     ready() {
       if (platform === 'darwin') {
-        key('meta s', () => save(this.note))        
+        key('meta s', () => save(this.note).then(() => this.$dispatch('alert', success)).catch(() => this.$dispatch('alert', error)))
       }
 
       if (platform === 'win32') {
-        key('ctrl s', () => save(this.note))        
+        key('ctrl s', () => save(this.note).then(() => this.$dispatch('alert', success)).catch(() => this.$dispatch('alert', error)))
       }
+    },
+    destroyed() {
+      key('meta s', () => {})
+      key('ctrl s', () => {})
     }
   }
 </script>
@@ -57,12 +76,10 @@
     overflow: auto;
     height: 100vh;
     padding: 0;
-
-    .form-control {    
+    .form-control {
       border-radius: 0;
       border-color: #ddd;
     }
-
     .vue-html5-editor {
       border-top: none;
       border-bottom: none;
