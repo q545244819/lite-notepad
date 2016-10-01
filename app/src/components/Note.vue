@@ -17,6 +17,7 @@
     getNotes
   } from '../vuex/getters'
   import {
+    getNotesFormLocal,
     setCurrentNoteId
   } from '../vuex/action'
 
@@ -26,8 +27,12 @@
         notes: getNotes
       },
       actions: {
+        getNotesFormLocal,
         setCurrentNoteId
       }
+    },
+    ready() {
+      this.getNotesFormLocal()
     }
   }
 </script>

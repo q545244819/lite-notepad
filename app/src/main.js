@@ -5,7 +5,6 @@ import 'font-awesome/css/font-awesome.min.css'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueEditor from 'vue-html5-editor'
-import Config from './config'
 
 import App from './App.vue'
 import Disable from './components/Disable.vue'
