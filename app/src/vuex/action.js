@@ -11,7 +11,7 @@ export const addNote = ({dispatch, state}) => {
   const data = {
     id: state.notes.length,
     localId: state.notes.length,
-    title: 'Nothing',
+    title: '未命名',
     content: '',
     date: format('yyyy-MM-dd hh:mm', new Date())
   }
