@@ -10,8 +10,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: config.width,
     height: config.height,
-    'min-width': config.width,
-    'min-height': config.height
+    minWidth: config.width,
+    minHeight: config.height,
   })
 
   mainWindow.loadURL(process.env.NODE_ENV === 'develop' ? devUrl : proUrl)
