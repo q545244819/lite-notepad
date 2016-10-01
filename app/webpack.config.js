@@ -7,7 +7,7 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    publicPath: process.env.NODE_ENV === 'production' ? `${__dirname}/dist/` : '/dist/',
     filename: 'build.js'
   },
   resolveLoader: {
@@ -38,16 +38,8 @@ module.exports = {
         loader: 'vue-html'
       },
       {
-        test: /\.(png|jpg|gif)$/,
-        loader: 'url',
-        query: {
-          limit: 10000,
-          name: '[name].[ext]?[hash]'
-        }
-      },
-      {
-        test: /\.(woff|woff2|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file',
+        test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
+        loader: `url-loader?limit=50000&name=[path][name].[ext]`
       }
     ]
   },
