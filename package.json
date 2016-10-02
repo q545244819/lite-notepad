@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=develop electron .",
     "start": "cross-env NODE_ENV=production electron .",
-    "package": "cross-env NODE_ENV=production electron-packager ./ MyApp --all --out ~/Desktop/MyApp --version 1.4.1 --overwrite --icon=./app/img/icon.icns"
+    "build:mac": "cross-env NODE_ENV=production electron-packager . Lite-notepad --ignore=node_modules/* --overwrite --icon=./app/img/icon.icns",
+    "build:win": "cross-env NODE_ENV=production electron-packager . Lite-notepad --ignore=node_modules/* --overwrite --icon=./app/img/icon.icn"
   },
   "devDependencies": {
     "cross-env": "^3.0.0",
