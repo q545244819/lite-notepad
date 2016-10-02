@@ -70,12 +70,14 @@
           })
       },
       remove() {
-        if (confirm('是否要删除这条笔记？')) {
-          this.$router.go({
-            name: 'note'
-          })
+        if (this.id) {
+          if (confirm('是否要删除这条笔记？')) {
+            this.$router.go({
+              name: 'note'
+            })
 
-          this.removeNoteById()
+            this.removeNoteById()
+          }
         }
       },
       history() {
@@ -108,8 +110,7 @@
         &:hover > .tooltip {
           display: block;
         }
-
-        position: relative;        
+        position: relative;
         cursor: pointer;
         display: block;
         padding: 20px 0;
