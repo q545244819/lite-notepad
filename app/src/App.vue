@@ -81,4 +81,9 @@
   }
 </script>
 
-<style lang="less"></style>
+<style lang="less">
+  html,
+  body {
+    font-family: Tahoma, Arial, Helvetica, "Microsoft YaHei New", "Microsoft Yahei", "微软雅黑", '宋体', 'SimSun', 'STXihei', "华文细黑", sans-serif!important;
+  }
+</style>

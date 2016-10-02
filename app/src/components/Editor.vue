@@ -113,6 +113,7 @@
       border-radius: 0;
       border-color: #ddd;
       font-size: 18px;
+      font-weight: bold;
     }
     .vue-html5-editor {
       border-top: none;
