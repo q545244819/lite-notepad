@@ -115,13 +115,6 @@ function createWindow() {
 
   ipcMain.on('openDevTools', () => mainWindow.webContents.openDevTools())
 
-  protocol.registerFileProtocol('atom', (request, callback) => {
-    const url = request.url.substr(7)
-    callback({ path: path.normalize(`${__dirname}/app/dist`) })
-  }, (error) => {
-    if (error) console.error('Failed to register protocol')
-  })
-
   if (process.platform === 'darwin') {
     const name = app.getName()
     template.unshift({
