@@ -109,8 +109,10 @@
     height: 100vh;
     padding: 0;
     .form-control {
+      padding: 20px 10px;
       border-radius: 0;
       border-color: #ddd;
+      font-size: 18px;
     }
     .vue-html5-editor {
       border-top: none;
