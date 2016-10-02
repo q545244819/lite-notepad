@@ -9,6 +9,7 @@
 
 <script>
   import os from 'os'
+  import format from 'date-format'
   import storage from 'electron-json-storage'
   import key from 'keyboard-shortcut'
   import {
@@ -29,7 +30,7 @@
     placement: 'top',
     content: '保存笔记失败！'
   }
-  const save = (note) => {
+  const saveNoteToLocal = (note) => {
     return new Promise((resolve, reject) => {
       storage.get('notes', (err, data) => {
         const changeNote = data.filter(item => item.id === note.id)[0]
@@ -46,6 +47,37 @@
         })
       })
     })
+  }
+  const saveHistoryToLocal = (note) => {
+    return new Promise((resolve, reject) => {
+      note.update = format('yyyy-MM-dd hh:mm:ss', new Date)
+
+      storage.get(`history-${note.id}`, (err, data) => {
+        if (Object.prototype.toString.call(data) === '[object Object]') {
+          data = []
+        }
+
+        if (data.length === 20) {
+          data.pop()
+        }
+
+        data.unshift(note)
+
+        storage.set(`history-${note.id}`, data, (err, data) => {
+          if (err) {
+            return reject(err)
+          }
+
+          resolve(data)
+        })
+      })
+    })
+  }
+  const save = (note) => {
+    return Promise.all([
+      saveNoteToLocal(note),
+      saveHistoryToLocal(note)
+    ])
   }
 
   export default {

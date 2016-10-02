@@ -11,15 +11,17 @@
         <span v-text="alert.content"></span>
       </p>
     </alert>
+    <history></history>
   </div>
 </template>
 
 <script>
   import { remote, clipboard, ipcRenderer } from 'electron'
   import store from './vuex/store'
+  import { alert } from 'vue-strap'  
   import Toolbar from './components/Toolbar.vue'
   import Note from './components/Note.vue'
-  import { alert } from 'vue-strap'
+  import History from './components/History.vue'
 
   const { Menu, MenuItem } = remote
   const menu = new Menu()
@@ -65,6 +67,7 @@
     components: {
       Toolbar,
       Note,
+      History,
       alert
     },
     ready() {
@@ -78,5 +81,4 @@
   }
 </script>
 
-<style lang="less">
-</style>
+<style lang="less"></style>

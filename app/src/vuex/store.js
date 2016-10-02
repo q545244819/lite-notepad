@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 const state = {
   notes: [],
-  currentNoteId: '' // 存放 note 的 id，而不是在数组下的下标值
+  currentNoteId: '', // 存放 note 的 id，而不是在数组下的下标值
+  showHistory: false
 }
 
 const mutations = {
@@ -22,6 +23,9 @@ const mutations = {
   },
   ['SET_CURRENTNOTEID'](state, id) {
     state.currentNoteId = id
+  },
+  ['TOGGLE_HISTORY'](state, bool) {
+    state.showHistory = bool || !state.showHistory
   }
 }
 

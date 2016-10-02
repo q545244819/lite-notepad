@@ -17,6 +17,14 @@
           </div>
         </div>
       </a>
+      <a class="fa fa-history" aria-hidden="true" @click="history()">
+        <div class="tooltip right" role="tooltip">
+          <div class="tooltip-arrow"></div>
+          <div class="tooltip-inner">
+            查看当前笔记历史
+          </div>
+        </div>
+      </a>
       <a class="fa fa-refresh" aria-hidden="true">
         <div class="tooltip right" role="tooltip">
           <div class="tooltip-arrow"></div>
@@ -32,17 +40,25 @@
 <script>
   import { popover } from 'vue-strap'
   import {
+    getCurrentNoteId
+  } from '../vuex/getters'
+  import {
     addNote,
     removeNoteById,
-    setCurrentNoteId
+    setCurrentNoteId,
+    toggleHistory
   } from '../vuex/action.js'
 
   export default {
     vuex: {
+      getters: {
+        id: getCurrentNoteId
+      },
       actions: {
         addNote,
         removeNoteById,
-        setCurrentNoteId
+        setCurrentNoteId,
+        toggleHistory
       }
     },
     methods: {
@@ -60,6 +76,11 @@
           })
 
           this.removeNoteById()
+        }
+      },
+      history() {
+        if (this.id) {
+          this.toggleHistory()
         }
       }
     },

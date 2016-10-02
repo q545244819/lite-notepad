@@ -38,33 +38,57 @@ export const addNote = ({dispatch, state}) => {
 }
 
 export const removeNoteById = ({dispatch, state}) => {
-  return new Promise((resolve, reject) => {
-    if (state.currentNoteId !== '') {
-      let i = 0
+  const note = () => {
+    return new Promise((resolve, reject) => {
+      if (state.currentNoteId) {
+        let i = 0
 
-      storage.get('notes', (err, data) => {
-        data.forEach((item, index) => {
-          if (item.id === state.currentNoteId) {
-            return i = index
-          }
+        storage.get('notes', (err, data) => {
+          data.forEach((item, index) => {
+            if (item.id === state.currentNoteId) {
+              return i = index
+            }
+          })
+          
+          data.splice(i, 1)
+
+          storage.set('notes', data, (err) => {
+            if (err) {
+              return reject(err)
+            }
+            
+            resolve(i)
+          })
         })
-        
-        data.splice(i, 1)
-
-        storage.set('notes', data, (err) => {
+      }
+    })
+  }
+  const history = () => {
+    return new Promise((resolve, reject) => {
+      if (state.currentNoteId) {
+        storage.remove(`history-${state.currentNoteId}`, (err) => {
           if (err) {
             return reject(err)
           }
-
-          dispatch('REMOVE_NOTE', i)
           
           resolve()
         })
-      })
-    }
-  }) 
+      }
+    })
+  }
+
+  return Promise.all([
+    note(),
+    history()
+  ]).then(args => {
+    dispatch('REMOVE_NOTE', args[0])    
+  })
 }
 
 export const setCurrentNoteId = ({dispatch, state}, id) => {
   dispatch('SET_CURRENTNOTEID', id)
+}
+
+export const toggleHistory = ({dispatch, state}, bool) => {
+  dispatch('TOGGLE_HISTORY', bool)
 }
