@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron')
+const { app, BrowserWindow, ipcMain, protocol } = require('electron')
 const config = require('./config')
 
 const devUrl = `http://127.0.0.1:${config.port}`
@@ -23,6 +23,13 @@ function createWindow() {
   })
 
   ipcMain.on('openDevTools', () => mainWindow.webContents.openDevTools())
+
+  protocol.registerFileProtocol('atom', (request, callback) => {
+    const url = request.url.substr(7)
+    callback({path: path.normalize(`${__dirname}/app/dist`)})
+  }, (error) => {
+    if (error) console.error('Failed to register protocol')
+  })
 }
 
 app.on('ready', createWindow)

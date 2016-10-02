@@ -7,7 +7,7 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    publicPath: process.env.NODE_ENV === 'production' ? `${__dirname}/dist/` : '/dist/',
+    publicPath: './dist/',
     filename: 'build.js'
   },
   resolveLoader: {
@@ -39,7 +39,7 @@ module.exports = {
       },
       {
         test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
-        loader: `url-loader?limit=50000&name=[path][name].[ext]`
+        loader: `url-loader?limit=50000&name=[][name].[ext]`
       }
     ]
   },
