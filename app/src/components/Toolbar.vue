@@ -33,7 +33,7 @@
           </div>
         </div>
       </a>
-      <a class="fa fa-sign-out" aria-hidden="true" v-if="hasLogin">
+      <a class="fa fa-sign-out" aria-hidden="true" v-if="hasLogin" @click="logout()">
         <div class="tooltip right" role="tooltip">
           <div class="tooltip-arrow"></div>
           <div class="tooltip-inner">
@@ -56,7 +56,8 @@
     addNote,
     removeNoteById,
     setCurrentNoteId,
-    toggleHistory
+    toggleHistory,
+    logout
   } from '../vuex/action.js'
 
   export default {
@@ -74,7 +75,8 @@
         addNote,
         removeNoteById,
         setCurrentNoteId,
-        toggleHistory
+        toggleHistory,
+        logout
       }
     },
     methods: {
