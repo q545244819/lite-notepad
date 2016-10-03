@@ -16,7 +16,7 @@ function createWindow() {
 
   mainWindow.loadURL(process.env.NODE_ENV === 'develop' ? devUrl : proUrl)
 
-  mainWindow.setMenu(null)
+  process.env.NODE_ENV !== 'develop' ? mainWindow.setMenu(null) : ''
   mainWindow.setHasShadow(true)
 
   mainWindow.on('closed', function () {

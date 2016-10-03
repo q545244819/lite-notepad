@@ -18,7 +18,7 @@
     </div>
     <div slot="modal-footer" class="modal-footer">
       <button type="button" class="btn btn-info" @click="register()">注册</button>
-      <button type="button" class="btn btn-primary" @click="login()">登录</button>
+      <button type="button" class="btn btn-primary" @click="sign()">登录</button>
     </div>
   </modal>
 </template>
@@ -68,7 +68,7 @@
           this.$dispatch('alert', error)
         }
       },
-      login() {
+      sign() {
         if (this.username && this.password) {
           this.show = false
           this.login()
