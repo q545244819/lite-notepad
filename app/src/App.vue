@@ -5,7 +5,7 @@
       <note></note>
       <router-view></router-view>
     </div>
-    <alert :show.sync="alert.show" :placement="alert.placement" :duration="alert.duration" :type="alert.type" width="200px">
+    <alert :show.sync="alert.show" :placement="alert.placement" :duration="alert.duration" :type="alert.type" dismissable="true" width="300px">
       <p>
         <b>提示：</b>
         <span v-text="alert.content"></span>
@@ -16,9 +16,13 @@
 </template>
 
 <script>
+  import storage from 'electron-json-storage'
   import { remote, clipboard, ipcRenderer } from 'electron'
   import store from './vuex/store'
-  import { alert } from 'vue-strap'  
+  import { alert } from 'vue-strap'
+  import {
+    login
+  } from './vuex/action'
   import Toolbar from './components/Toolbar.vue'
   import Note from './components/Note.vue'
   import History from './components/History.vue'
@@ -55,6 +59,11 @@
         }
       }
     },
+    vuex: {
+      actions: {
+        login
+      }
+    },
     events: {
       alert(obj) {
         this.alert.show = obj.show
@@ -74,6 +83,12 @@
       this.$el.addEventListener('contextmenu', (e) => {
         e.preventDefault();
 	      menu.popup(remote.getCurrentWindow());
+      })
+
+      storage.get('user', (err, data) => {
+        if (data.id && data.username) {
+          this.login()
+        }
       })
     },
     replace: false,    

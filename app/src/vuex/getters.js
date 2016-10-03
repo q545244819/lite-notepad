@@ -5,3 +5,5 @@ export const getNoteById = state => state.notes.filter(item => item.id === state
 export const getCurrentNoteId = state => state.currentNoteId
 
 export const getShowHistory = state => state.showHistory
+
+export const getHasLogin = state => state.hasLogin

@@ -26,7 +26,8 @@
   }
   const error = {
     show: true,
-    type: 'error',
+    duration: 1500,
+    type: 'danger',
     placement: 'top',
     content: '保存笔记失败！'
   }

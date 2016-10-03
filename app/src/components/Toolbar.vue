@@ -25,7 +25,7 @@
           </div>
         </div>
       </a>
-      <a class="fa fa-refresh" aria-hidden="true">
+      <a class="fa fa-refresh" aria-hidden="true" @click="sync()">
         <div class="tooltip right" role="tooltip">
           <div class="tooltip-arrow"></div>
           <div class="tooltip-inner">
@@ -33,14 +33,24 @@
           </div>
         </div>
       </a>
+      <a class="fa fa-sign-out" aria-hidden="true" v-if="hasLogin">
+        <div class="tooltip right" role="tooltip">
+          <div class="tooltip-arrow"></div>
+          <div class="tooltip-inner">
+            用户登出
+          </div>
+        </div>
+      </a>
     </nav>
+    <login :show.sync="showLogin"></login>
   </div>
 </template>
 
 <script>
-  import { popover } from 'vue-strap'
+  import Login from './Login.vue'
   import {
-    getCurrentNoteId
+    getCurrentNoteId,
+    getHasLogin
   } from '../vuex/getters'
   import {
     addNote,
@@ -50,9 +60,15 @@
   } from '../vuex/action.js'
 
   export default {
+    data() {
+      return {
+        showLogin: false
+      }
+    },
     vuex: {
       getters: {
-        id: getCurrentNoteId
+        id: getCurrentNoteId,
+        hasLogin: getHasLogin
       },
       actions: {
         addNote,
@@ -84,10 +100,17 @@
         if (this.id) {
           this.toggleHistory()
         }
+      },
+      sync() {
+        if (this.hasLogin) {
+
+        } else {
+          this.showLogin = true
+        }
       }
     },
     components: {
-      popover
+      Login
     }
   }
 </script>
