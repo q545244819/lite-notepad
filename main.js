@@ -107,7 +107,9 @@ function createWindow() {
 
   mainWindow.loadURL(process.env.NODE_ENV === 'develop' ? devUrl : proUrl)
 
-  mainWindow.setMenuBarVisibility(false)
+  mainWindow.setMenuBarVisibility(true)
+  mainWindow.setMenu(null)
+  mainWindow.setHasShadow(true)
 
   mainWindow.on('closed', function () {
     mainWindow = null
