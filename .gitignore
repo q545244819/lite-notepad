@@ -2,3 +2,4 @@ node_modules
 app/dist/
 .DS_Store
 Lite-notepad-darwin-x64
+Lite-notepad-win32-x64
