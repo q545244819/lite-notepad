@@ -18,6 +18,9 @@ const mutations = {
   ['ADD_NOTE'](state, note) {
     state.notes.push(note)
   },
+  ['SET_NOTE'](state, notes) {
+    state.notes = notes
+  },
   ['REMOVE_NOTE'](state, index) {
     state.notes.splice(index, 1)
 

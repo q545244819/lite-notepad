@@ -22,7 +22,7 @@ export const addNote = ({dispatch, state}) => {
       id: uid(),
       title: '未命名',
       content: '',
-      date: format('yyyy-MM-dd hh:mm', new Date())
+      date: format('yyyy-MM-dd hh:mm:ss', new Date())
     }
 
     storage.set('notes', [].concat(state.notes, [data]), err => {
@@ -33,6 +33,20 @@ export const addNote = ({dispatch, state}) => {
       dispatch('ADD_NOTE', data)
 
       resolve(data)
+    })
+  })
+}
+
+export const setNote = ({dispatch, state}, notes) => {
+  return new Promise((resolve, reject) => {
+    storage.set('notes', notes, err => {
+      if (err) {
+        return reject(err)
+      }
+
+      dispatch('SET_NOTE', notes)
+      
+      resolve(notes)
     })
   })
 }

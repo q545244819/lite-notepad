@@ -48,6 +48,7 @@
 
 <script>
   import $ from 'jquery'
+  import uid from 'uid'
   import Config from '../config'
   import Login from './Login.vue'
   import {
@@ -58,6 +59,7 @@
   } from '../vuex/getters'
   import {
     addNote,
+    setNote,
     removeNoteById,
     setCurrentNoteId,
     toggleHistory,
@@ -79,6 +81,7 @@
       },
       actions: {
         addNote,
+        setNote,
         removeNoteById,
         setCurrentNoteId,
         toggleHistory,
@@ -111,6 +114,48 @@
       },
       sync() {
         if (this.hasLogin) {
+          const promises = []
+
+          this.notes.forEach(item => {
+            promises.push($.post(Config.ajax, {
+              cmd: 'Note_up',
+              Note_title: item.title,
+              Note_text: item.content,
+              Note_id: item.dbId || '',
+              token: this.token
+            }))
+          })
+
+          $.when.apply(null, promises)
+            .then(args => {
+              const notes = args.data.map(item => {
+                return {
+                  title: item.Note_title,
+                  content: item.Note_text,
+                  dbId: item.Note_id,
+                  id: uid(),
+                  date: item.Create_time
+                }
+              })
+
+              return this.setNote(notes)
+            })
+            .then(notes => this.$dispatch('alert', {
+              show: true,
+              duration: 1500,
+              type: 'success',
+              placement: 'top',
+              content: '同步笔记成功'
+            }))
+            .catch(err => {
+              this.$dispatch('alert', {
+                show: true,
+                duration: 1500,
+                type: 'danger',
+                placement: 'top',
+                content: '同步笔记失败，请稍后尝试'
+              })
+            })
         } else {
           this.showLogin = true
         }
