@@ -81,6 +81,8 @@
             })
         } else {
           error.content = '用户名和密码长度必须6位以上'
+          
+          this.loading = false
 
           this.$dispatch('alert', error)
         }
@@ -100,6 +102,8 @@
             })
             .catch(err => {
               error.content = '请检查用户名或密码是否错误'
+
+              this.loading = false              
 
               this.$dispatch('alert', error)
             })
