@@ -66,6 +66,9 @@
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
       }
+      p {
+        font-size: 12px;
+      }
       .icon {
         position: absolute;
         right: 15px;

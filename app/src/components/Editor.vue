@@ -82,6 +82,17 @@
       saveHistoryToLocal(note)
     ])
   }
+  const setChangeListener = (div, listener) => {
+    div.addEventListener("keydown", listener)
+    div.addEventListener("paste", listener)
+    div.addEventListener("delete", listener)
+  }
+  const removeChangeListener = div => {
+    div.onKeydown = null
+    div.onPaste = null
+    div.onDelete = null
+  }
+
 
   export default {
     vuex: {
@@ -90,19 +101,43 @@
       }
     },
     ready() {
-      if (platform === 'darwin') {
-        key('meta s', () => save(this.note).then(() => this.$dispatch('alert', success)).catch(() => this.$dispatch('alert', error)))
+      let keys = ''
+
+      switch (platform) {
+        case 'darwin':
+          keys = 'meta s'
+          break
+        case 'win32':
+          keys = 'ctrl s'
+          break
       }
 
-      if (platform === 'win32') {
-        key('ctrl s', () => save(this.note).then(() => this.$dispatch('alert', success)).catch(() => this.$dispatch('alert', error)))
-      }
+      key(keys, () => save(this.note).then(() => {
+        document.title = this.note.title
+
+        return this.$dispatch('alert', success)
+      }).catch(() => this.$dispatch('alert', error)))
+
+      this.$el.querySelector('.form-control').addEventListener('input', e => {
+        document.title = `${this.note.title} - 未保存`
+      })
+      setChangeListener(this.$el.querySelector('.vue-html5-editor > .content'), e => {
+        document.title = `${this.note.title} - 未保存`
+      })
 
       $(this.$el).niceScroll({cursorcolor: "#999999", zindex: 99999})
+
+      document.title = this.note.title
+    },
+    beforeDestroyed() {
+      this.$el.querySelector('.form-control').onInput = null
+      removeChangeListener(this.$el.querySelector('.vue-html5-editor > .content'))
     },
     destroyed() {
       key('meta s', () => {})
       key('ctrl s', () => {})
+
+      document.title = 'lite-notepad'
     }
   }
 </script>
