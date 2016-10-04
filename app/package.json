@@ -7,12 +7,12 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "ajax-promise": "^0.8.1",
     "babel-runtime": "^6.0.0",
     "bootstrap": "^3.3.7",
     "date-format": "^0.0.2",
     "electron-json-storage": "^2.0.0",
     "font-awesome": "^4.6.3",
+    "jquery": "^3.1.1",
     "keyboard-shortcut": "^1.2.0",
     "normalize.css": "^4.2.0",
     "uid": "0.0.2",

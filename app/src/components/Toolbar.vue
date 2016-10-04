@@ -47,10 +47,14 @@
 </template>
 
 <script>
+  import $ from 'jquery'
+  import Config from '../config'
   import Login from './Login.vue'
   import {
     getCurrentNoteId,
-    getHasLogin
+    getHasLogin,
+    getToken,
+    getNotes
   } from '../vuex/getters'
   import {
     addNote,
@@ -69,7 +73,9 @@
     vuex: {
       getters: {
         id: getCurrentNoteId,
-        hasLogin: getHasLogin
+        hasLogin: getHasLogin,
+        token: getToken,
+        notes: getNotes
       },
       actions: {
         addNote,
@@ -105,7 +111,6 @@
       },
       sync() {
         if (this.hasLogin) {
-
         } else {
           this.showLogin = true
         }

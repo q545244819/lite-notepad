@@ -87,7 +87,7 @@
 
       storage.get('user', (err, data) => {
         if (data.token) {
-          this.login()
+          this.login(data.token)
         }
       })
     },

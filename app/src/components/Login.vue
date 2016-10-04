@@ -26,7 +26,7 @@
 
 <script>
   import storage from 'electron-json-storage'
-  import AjaxPromise from 'ajax-promise'
+  import $ from 'jquery'
   import Config from '../config'
   import { modal } from 'vue-strap'
   import {
@@ -65,7 +65,7 @@
         const password = this.password && this.password.length >= 6
 
         if (username && password) {
-          AjaxPromise
+          $
             .post(Config.ajax, { cmd: 'register', name: this.username, password: this.password })
             .then(data => {
               storage.set('user', data, (err) => {
@@ -89,7 +89,7 @@
         if (this.username && this.password) {
           this.loading = true
 
-          AjaxPromise
+          $
             .post(Config.ajax, { cmd: 'login', name: this.username, password: this.password })
             .then(data => {
               storage.set('user', data, (err) => {
