@@ -121,14 +121,22 @@
               cmd: 'Note_up',
               Note_title: item.title,
               Note_text: item.content,
-              Note_id: item.dbId || '',
+              Note_Id: item.dbId || '',
               token: this.token
             }))
           })
 
           $.when.apply(null, promises)
             .then(args => {
-              const notes = args.data.map(item => {
+              let data = null
+
+              if (Array.isArray(args)) {
+                data = args[0].data
+              } else {
+                data = args ? args.data : []
+              }
+
+              const notes = data.map(item => {
                 return {
                   title: item.Note_title,
                   content: item.Note_text,
@@ -136,6 +144,10 @@
                   id: uid(),
                   date: item.Create_time
                 }
+              })
+
+              this.$router.go({
+                name: 'note'
               })
 
               return this.setNote(notes)

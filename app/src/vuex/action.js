@@ -1,3 +1,5 @@
+import $ from 'jquery'
+import Config from '../config'
 import storage from 'electron-json-storage'
 import format from 'date-format'
 import uid from 'uid'
@@ -90,13 +92,40 @@ export const removeNoteById = ({dispatch, state}) => {
       }
     })
   }
+  const remote = () => {
+    return new Promise((resolve, reject) => {
+      let i = 0
+      
+      state.notes.forEach((item, index) => {
+        if (item.id === state.currentNoteId) {
+          return i = index
+        }
+      })
+    
+      const note = state.notes.splice(i, 1)[0]
 
-  return Promise.all([
-    note(),
-    history()
-  ]).then(args => {
-    dispatch('REMOVE_NOTE', args[0])    
-  })
+      if (state.token && state.hasLogin && note.dbId) {
+        $.post(Config.ajax, {
+          cmd: 'Note_Delete',
+          token: state.token,
+          Note_Id: note.dbId
+        }).then(data => resolve(data)).catch(err => reject(err))
+      } else {
+        resolve()
+      }
+    })
+  }
+
+  remote()
+    .then(() => {
+      return Promise.all([
+        note(),
+        history()
+      ])
+    })
+    .then(args => {
+      dispatch('REMOVE_NOTE', args[0])    
+    })
 }
 
 export const setCurrentNoteId = ({dispatch, state}, id) => {
