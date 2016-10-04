@@ -68,10 +68,10 @@
           AjaxPromise
             .post(Config.ajax, { cmd: 'register', name: this.username, password: this.password })
             .then(data => {
-              storage.set('user', data, (err, data) => {
+              storage.set('user', data, (err) => {
                 this.show = false
                 this.loading = false
-                this.login()
+                this.login(data.token)
               })
             })
             .catch(err => {
@@ -92,10 +92,10 @@
           AjaxPromise
             .post(Config.ajax, { cmd: 'login', name: this.username, password: this.password })
             .then(data => {
-              storage.set('user', data, (err, data) => {
+              storage.set('user', data, (err) => {
                 this.show = false
                 this.loading = false
-                this.login()
+                this.login(data.token)
               })
             })
             .catch(err => {

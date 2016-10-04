@@ -7,7 +7,8 @@ const state = {
   notes: [],
   currentNoteId: '', // 存放 note 的 id，而不是在数组下的下标值
   showHistory: false,
-  hasLogin: false
+  hasLogin: false,
+  token: ''
 }
 
 const mutations = {
@@ -28,11 +29,13 @@ const mutations = {
   ['TOGGLE_HISTORY'](state, bool) {
     state.showHistory = bool || !state.showHistory
   },
-  ['LOGIN'](state) {
+  ['LOGIN'](state, token) {
     state.hasLogin = true
+    state.token = token
   },
   ['LOGOUT'](state) {
     state.hasLogin = false
+    state.token = ''
   }
 }
 

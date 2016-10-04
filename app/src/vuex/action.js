@@ -93,8 +93,8 @@ export const toggleHistory = ({dispatch, state}, bool) => {
   dispatch('TOGGLE_HISTORY', bool)
 }
 
-export const login = ({dispatch, state}) => {
-  dispatch('LOGIN')
+export const login = ({dispatch, state}, token) => {
+  dispatch('LOGIN', token)
 }
 
 export const logout = ({dispatch, state}) => {

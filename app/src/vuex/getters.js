@@ -7,3 +7,5 @@ export const getCurrentNoteId = state => state.currentNoteId
 export const getShowHistory = state => state.showHistory
 
 export const getHasLogin = state => state.hasLogin
+
+export const getToken = state => state.token
