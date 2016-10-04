@@ -17,13 +17,17 @@
       </div>
     </div>
     <div slot="modal-footer" class="modal-footer">
-      <button type="button" class="btn btn-info" @click="register()">注册</button>
-      <button type="button" class="btn btn-primary" @click="sign()">登录</button>
+      <button v-if="!loading" type="button" class="btn btn-info" @click="register()">注册</button>
+      <button v-if="!loading" type="button" class="btn btn-primary" @click="sign()">登录</button>
+      <button v-if="loading" type="button" class="btn btn-info" disabled>处理中</button>
     </div>
   </modal>
 </template>
 
 <script>
+  import storage from 'electron-json-storage'
+  import AjaxPromise from 'ajax-promise'
+  import Config from '../config'
   import { modal } from 'vue-strap'
   import {
     login
@@ -46,7 +50,8 @@
     data() {
       return {
         username: '',
-        password: ''
+        password: '',
+        loading: false
       }
     },
     vuex: {
@@ -60,8 +65,20 @@
         const password = this.password && this.password.length >= 6
 
         if (username && password) {
-          this.show = false
-          this.login()
+          AjaxPromise
+            .post(Config.ajax, { cmd: 'register', name: this.username, password: this.password })
+            .then(data => {
+              storage.set('user', data, (err, data) => {
+                this.show = false
+                this.loading = false
+                this.login()
+              })
+            })
+            .catch(err => {
+              error.content = '请检查用户名或密码是否错误'
+
+              this.$dispatch('alert', error)
+            })
         } else {
           error.content = '用户名和密码长度必须6位以上'
 
@@ -70,8 +87,22 @@
       },
       sign() {
         if (this.username && this.password) {
-          this.show = false
-          this.login()
+          this.loading = true
+
+          AjaxPromise
+            .post(Config.ajax, { cmd: 'login', name: this.username, password: this.password })
+            .then(data => {
+              storage.set('user', data, (err, data) => {
+                this.show = false
+                this.loading = false
+                this.login()
+              })
+            })
+            .catch(err => {
+              error.content = '请检查用户名或密码是否错误'
+
+              this.$dispatch('alert', error)
+            })
         } else {
           error.content = '请检查用户名或密码是否错误'
 

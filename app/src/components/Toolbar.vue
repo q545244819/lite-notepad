@@ -33,7 +33,7 @@
           </div>
         </div>
       </a>
-      <a class="fa fa-sign-out" aria-hidden="true" v-if="hasLogin" @click="logout()">
+      <a class="fa fa-sign-out" aria-hidden="true" v-show="hasLogin" @click="logout()">
         <div class="tooltip right" role="tooltip">
           <div class="tooltip-arrow"></div>
           <div class="tooltip-inner">

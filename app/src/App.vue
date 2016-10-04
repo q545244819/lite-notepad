@@ -86,7 +86,7 @@
       })
 
       storage.get('user', (err, data) => {
-        if (data.id && data.username) {
+        if (data.token) {
           this.login()
         }
       })

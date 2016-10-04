@@ -98,5 +98,5 @@ export const login = ({dispatch, state}) => {
 }
 
 export const logout = ({dispatch, state}) => {
-  dispatch('LOGOUT')
+  storage.remove('user', () => dispatch('LOGOUT'))
 }

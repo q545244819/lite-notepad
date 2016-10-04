@@ -7,6 +7,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "ajax-promise": "^0.8.1",
     "babel-runtime": "^6.0.0",
     "bootstrap": "^3.3.7",
     "date-format": "^0.0.2",
