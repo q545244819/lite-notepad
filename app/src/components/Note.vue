@@ -13,6 +13,8 @@
 </template>
 
 <script>
+  import $ from 'jquery'
+  import NiceScroll from 'jquery.nicescroll'
   import {
     getNotes
   } from '../vuex/getters'
@@ -33,6 +35,8 @@
     },
     ready() {
       this.getNotesFormLocal()
+
+      $(this.$el).niceScroll({cursorcolor: "#999999"})
     }
   }
 </script>

@@ -8,6 +8,8 @@
 </template>
 
 <script>
+  import $ from 'jquery'
+  import NiceScroll from 'jquery.nicescroll'
   import os from 'os'
   import format from 'date-format'
   import storage from 'electron-json-storage'
@@ -95,6 +97,8 @@
       if (platform === 'win32') {
         key('ctrl s', () => save(this.note).then(() => this.$dispatch('alert', success)).catch(() => this.$dispatch('alert', error)))
       }
+
+      $(this.$el).niceScroll({cursorcolor: "#999999", zindex: 99999})
     },
     destroyed() {
       key('meta s', () => {})
