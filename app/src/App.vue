@@ -42,10 +42,13 @@
     label: '粘贴',
     role: 'paste'
   }))
-  menu.append(new MenuItem({
-    label: '开发者工具',
-    click: () => ipcRenderer.send('openDevTools')
-  }))
+  
+  if (process.env.NODE_ENV === 'develop') {
+    menu.append(new MenuItem({
+      label: '开发者工具',
+      click: () => ipcRenderer.send('openDevTools')
+    }))
+  }
 
   export default {
     data() {

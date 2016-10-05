@@ -23,7 +23,9 @@ function createWindow() {
     mainWindow = null
   })
 
-  ipcMain.on('openDevTools', () => mainWindow.webContents.openDevTools())
+  if (process.env.NODE_ENV === 'develop') {
+    ipcMain.on('openDevTools', () => mainWindow.webContents.openDevTools())
+  }
 
   if (process.platform === 'darwin') {
     const name = app.getName()
