@@ -5,7 +5,7 @@
         v-for="item in notes"
         v-link="{name: 'edit', params: {id: item.id}, activeClass: 'active'}"
         @click="setCurrentNoteId(item.id)">
-        <h4 v-text="item.title"></h4>
+        <h4>{{ item.title === '' ? '未命名' : item.title }}</h4>
         <p>创建于：<span v-text="item.date"></span></p>
       </section>
     </nav>
